@@ -9,6 +9,11 @@ function getCharacters(_req: Request, res: Response) {
 function postCharacter(req: Request, res: Response) {
   const body = req.body as Omit<Character, "id">
 
+  const characterExists = characters.find(character => character.fullName === body.fullName)
+  if (characterExists) {
+    return res.sendStatus(404)
+  }
+
   characters.push({
     id: characters[characters.length - 1].id + 1,
     ...body

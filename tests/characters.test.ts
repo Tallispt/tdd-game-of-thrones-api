@@ -5,12 +5,6 @@ import { createCharacterBody, createInvalidCharacterBody } from './factory/chara
 
 const api = supertest(server)
 
-let chars = characters
-
-beforeEach(() => {
-  // resetCharacters()
-})
-
 describe("GET /characters", () => {
   it("Should respond with status 200 and all the characters", async () => {
     const result = await api.get('/characters')
@@ -39,6 +33,14 @@ describe("POST /characters", () => {
     const result = await api.post("/characters").send(body)
 
     expect(result.status).toBe(400);
+  })
+
+  it("Should respond with status 404 if character fullName exists", async () => {
+    const body = createCharacterBody("Yara Greyjoy");
+
+    const result = await api.post("/characters").send(body)
+
+    expect(result.status).toBe(404);
   })
 
   it("Should respond with status 201", async () => {

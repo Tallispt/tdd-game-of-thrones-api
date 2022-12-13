@@ -554,11 +554,3 @@ export const continents = [
     name: "Ulthos"
   }
 ] as Continent[]
-
-export function resetCharacters() {
-
-}
-
-export function resetContinents() {
-
-}
